@@ -206,7 +206,7 @@ export const Action: React.FC<Props> = (props) => {
                                             <SelectValue placeholder={project} className='text-xs' />
                                         </SelectTrigger>
                                         <SelectContent className='text-xs'>
-                                            {projects.map(project => (<SelectItem value={`${project.name}`} className='text-xs'>{project.name}</SelectItem>))}
+                                            {projects.map(project => (<SelectItem value={`${project.name}`} className='text-xs' key={project.id}>{project.name}</SelectItem>))}
                                         </SelectContent>
                                     </Select>
                                 </div>

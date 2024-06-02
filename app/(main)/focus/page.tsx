@@ -25,7 +25,7 @@ export default async function Page() {
   const actionsDisplay = focusedActions.map(action => {
     return (<Action id={action.id} name={action.name} description={action.description} project={action.project} urgency={action.urgency} date={action.date
 
-    } time={action.time} isFocused={action.isFocused} isChecked={action.isChecked} projects={[]} setActions={undefined}></Action>)
+    } time={action.time} isFocused={action.isFocused} isChecked={action.isChecked} projects={[]} setActions={undefined} key={action.id}></Action>)
   })
 
   const sumActionTime = focusedActions.reduce((acc, action) => acc + action.time, 0)

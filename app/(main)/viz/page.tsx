@@ -7,13 +7,24 @@ import { ScatterChart } from "@tremor/react"
 import { Skeleton } from "@/components/ui/skeleton"
 
 
-
+type Action = {
+  id: string;
+  name: string;
+  description: string;
+  project: string;
+  urgency: number;
+  date: Date;
+  time: number;
+  people: string;
+  isFocused: boolean;
+  isChecked: boolean;
+};
 
 
 
 export default function Page() {
 
-  const [actions, setActions] = React.useState<any>(null)
+  const [actions, setActions] = React.useState<Action[]>([])
   const [loading, setLoading] = React.useState(true);
 
 

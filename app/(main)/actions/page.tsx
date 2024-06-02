@@ -26,12 +26,12 @@ type Action = {
   name: string;
   description: string;
   project: string;
-  urgency: string;
+  urgency: number;
   date: Date;
-  time: string;
+  time: number;
   people: string;
   isFocused: boolean;
-  ischecked: boolean;
+  isChecked: boolean;
 };
 type Project = {
   id : string

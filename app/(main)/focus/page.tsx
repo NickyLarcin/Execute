@@ -1,6 +1,7 @@
 'use server'
 
 
+
 import { Action } from "@/components/Action";
 import { db } from "@/lib/db";
 import React from "react";
@@ -8,6 +9,18 @@ import { Card, ProgressBar } from '@tremor/react';
 import { sum } from "d3";
 import { currentUser } from "@clerk/nextjs/server";
 
+type Action = {
+  id: string;
+  name: string;
+  description: string;
+  project: string;
+  urgency: number;
+  date: Date;
+  time: number;
+  people: string;
+  isFocused: boolean;
+  isChecked: boolean;
+};
 
 export default async function Page() {
 
@@ -22,7 +35,7 @@ export default async function Page() {
      }
   })
 
-  const actionsDisplay = focusedActions.map(action => {
+  const actionsDisplay = focusedActions.map( (action : Action) => {
     return (<Action id={action.id} name={action.name} description={action.description} project={action.project} urgency={action.urgency} date={action.date
 
     } time={action.time} isFocused={action.isFocused} isChecked={action.isChecked} projects={[]} setActions={undefined} key={action.id}></Action>)

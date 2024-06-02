@@ -41,8 +41,8 @@ export default async function Page() {
     } time={action.time} isFocused={action.isFocused} isChecked={action.isChecked} projects={[]} setActions={undefined} key={action.id}></Action>)
   })
 
-  const sumActionTime = focusedActions.reduce((acc, action) => acc + action.time, 0)
-  const sumActionTimeifChcked = focusedActions.reduce((acc, action) => action.isChecked ? acc + action.time : acc, 0)
+  const sumActionTime = focusedActions.reduce((acc : number, action : Action) => acc + action.time, 0)
+  const sumActionTimeifChcked = focusedActions.reduce((acc : number, action : Action) => action.isChecked ? acc + action.time : acc, 0)
 
 
 

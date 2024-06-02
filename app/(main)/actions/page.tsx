@@ -33,6 +33,10 @@ type Action = {
   isFocused: boolean;
   ischecked: boolean;
 };
+type Project = {
+  id : string
+  name : string
+}
 
 
 export default async function Home() {
@@ -59,7 +63,7 @@ export default async function Home() {
 
 
 
-  const  displayActions = projects.map( async project=> {
+  const  displayActions = projects.map( async (project : Project) => {
 
       const actions = await actionsOfProject(project.name, user.id)
 

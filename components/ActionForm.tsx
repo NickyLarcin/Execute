@@ -194,7 +194,7 @@ export const ActionForm: React.FC<Props> = ({children, project, isFocused_p}) =>
 
           <input className="hidden" name="date" type="text" value={date?.toISOString()} />
 
-          <div className="w-full flex gap-2 items-center justify-between border rounded-md px-2 h-8 cursor-pointer text-neutral-400">
+          {tag === "action" && <div className="w-full flex gap-2 items-center justify-between border rounded-md px-2 h-8 cursor-pointer text-neutral-400">
             <div>
               <svg
                 viewBox="0 0 24 24"
@@ -210,7 +210,7 @@ export const ActionForm: React.FC<Props> = ({children, project, isFocused_p}) =>
             <Slider defaultValue={[50]} max={200} step={10} name="time" onValueChange={(val) => { setTimeEstimate(val) }} />
 
             <div className="text-sm m-2 text-neutral-600 flex">{timeEstimate}</div>
-          </div>
+          </div>}
         </div>
 
 

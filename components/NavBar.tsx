@@ -18,7 +18,7 @@ export default function App() {
     console.log(currentRoute)
 
     return (
-        <div className="h-14 z-50 flex justify-between items-center shadow-sm px-4 bg-gradient-to-r from-red-500 to-orange-500 text-white">
+        <div className="h-14 z-50 fixed w-full flex justify-between items-center shadow-sm px-4 bg-gradient-to-r from-red-500 to-orange-500 text-white">
             <div className="w-40">
 
 

@@ -232,8 +232,10 @@ export const Action: React.FC<Props> = (props) => {
                                     </PopoverContent>
                                 </Popover>
                             </div>
-                            &bull;
-                            <div className='flex'>
+                           
+                            {props.tag === "action" &&
+                                <>&bull; 
+                                <div className='flex'> 
                                 <Popover>
                                     <PopoverTrigger asChild>
                                         <Button variant="outline" className='flex gap-1 border-none h-6 text-xs'>
@@ -253,7 +255,7 @@ export const Action: React.FC<Props> = (props) => {
                                         <Slider defaultValue={[props.time]} max={200} step={10} name="time" onValueChange={(value) => { handleEdit("time", value[0]) }} />
                                     </PopoverContent>
                                 </Popover>
-                            </div>
+                            </div></>}
                             &bull;
                             <div className='flex gap-2 hover:bg-accent hover:text-accent-foreground px-2 rounded-md h-6 items-center'>
                                 <div className='flex gap-2 border-none h-6 text-xs items-center'>
@@ -269,7 +271,7 @@ export const Action: React.FC<Props> = (props) => {
                         <div className=''>
                             <div>
                             <Select name="tag" onValueChange={(value) => { handleEdit("tag", value) }}>
-                                        <SelectTrigger className={` ${tagsDic[tag][1]} w-16 h-4 rounded-full border  bg-white text-[10px] text-center font-semibold`}>
+                                        <SelectTrigger className={` ${tagsDic[tag][1]} w-16 h-4 rounded-full border  bg-white text-[10px] flex justify-center items-center font-semibold`}>
                                             <SelectValue placeholder={tag} className='text-xs' />
                                         </SelectTrigger>
                                         <SelectContent className='text-xs'>

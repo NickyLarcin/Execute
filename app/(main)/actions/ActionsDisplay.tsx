@@ -4,6 +4,7 @@
 import { ActionsContainer } from '@/components/ActionsContainer'
 import React, { useEffect, useState } from 'react'
 import FilterPane from './FilterPane'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 
 type Props = {
     actions: Action[]
@@ -33,14 +34,23 @@ type Project = {
 export default function Page(props : Props) {
 
     const [actions, setActions] = useState<Action[]>([])
-    const [tagFilter, setTagfilter] = useState("")
+    
 
-    console.log(tagFilter)
+    const router = useRouter()
+    const searchParams = useSearchParams()
+    const pahtname = usePathname()
+
+    const tagFilter = searchParams.get("tag")
+
+
+    console.log("tagFilter")
+    console.log(searchParams.get("tag"))
 
 
     useEffect(()=>{
 
-            setActions(props.actions.filter(action => tagFilter === "" || action.tag === tagFilter ))
+            console.log(tagFilter)
+            setActions(props.actions.filter(action => !tagFilter || action.tag === tagFilter ))
 
     },[props.actions, tagFilter])
 
@@ -68,10 +78,6 @@ export default function Page(props : Props) {
     return (
 
         <>
-        <FilterPane 
-        tagFilter = {tagFilter}
-        setTagFilter={setTagfilter}
-        />
         {displayActions}
         </>
 

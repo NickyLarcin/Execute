@@ -62,12 +62,12 @@ export default async function Home() {
 
   
   return (
-    <div className="relative w-full flex justify-center">
+    <div className="relative w-full flex">
 
       
       
     
-    <div className="max-w-[624px] flex flex-col w-full relative pt-10 pb-20">
+    <div className="ml-12 max-w-[724px] flex flex-col w-full relative pt-10 pb-20 border rounded-md m-2 p-4">
       <div className="flex w-full justify-between relative">
           <div className="flex flex-col ">
             <div className="font-semibold text-xl">Actions</div>
@@ -98,6 +98,12 @@ export default async function Home() {
       </div>
 
       
+    </div>
+    <div className="max-w-[424px] flex flex-col w-full relative m-2 ">
+      <div className="max-w-[424px] w-full h-full border rounded-md fixed">
+          <FilterPane></FilterPane>
+      </div>
+
     </div>
     
     </div>

@@ -9,7 +9,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     return (
         <div className='w-full'>
             {/* Add your header component here */}
-            <header>
+            <header className='mb-14'>
                 <NavBar />
             </header>
 

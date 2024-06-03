@@ -67,10 +67,11 @@ export default async function Page() {
           </div>
           
           <ActionForm
-              children = {(<div className="h-14 w-14 hover:bg-orange-200 transition text-2xl rounded-md flex justify-center items-center border border-orange-500 text-orange-500 ">+</div>)}
               project = {""}
               isFocused_p = {true}
-              />
+              > 
+              <div className="h-14 w-14 hover:bg-orange-200 transition text-2xl rounded-md flex justify-center items-center border border-orange-500 text-orange-500 ">+</div>
+              </ActionForm>
         </div>
         <hr className="w-full"></hr>
         <div className="w-full py-5 flex">

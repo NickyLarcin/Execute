@@ -74,10 +74,9 @@ export default async function Home() {
             <div className="font-base text-neutral-400">Consult your actions here</div>
           </div>
           
-          <ActionForm
-            children = {(<div className="h-14 w-14 hover:bg-orange-200 transition text-2xl rounded-md flex justify-center items-center border border-orange-500 text-orange-500 ">+</div>)}
-            project = {""}
-            />
+          <ActionForm project = {""}>
+              <div className="h-14 w-14 hover:bg-orange-200 transition text-2xl rounded-md flex justify-center items-center border border-orange-500 text-orange-500 ">+</div>
+            </ActionForm>
           
         </div>
         <hr className="w-full my-5"></hr>

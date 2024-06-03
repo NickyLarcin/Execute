@@ -28,7 +28,7 @@ type Actions = {
   time: number
   isFocused: boolean
   isChecked: boolean
-  tag : string
+  tag: string
 
 }
 
@@ -53,10 +53,9 @@ export const ActionsContainer: React.FC<Props> = ({ projectName, actions_prop, p
           <div className="font-semibold text-neutral-400">{actions.length}</div>
         </div>
         <div>
-          <ActionForm
-            children={(<div className="h-4 w-14 hover:bg-orange-200 transition text-xl rounded-md flex justify-center items-center   text-orange-500 ">+</div>)}
-            project={projectName}
-          />
+          <ActionForm project={projectName}>
+            <div className="h-4 w-14 hover:bg-orange-200 transition text-xl rounded-md flex justify-center items-center   text-orange-500 ">+</div>
+          </ActionForm>
         </div>
       </div>
       <div className={`w-full h-[3px] bg-gradient-to-r from-red-500 to-orange-400 rounded-xl mb-2`}></div>
@@ -74,7 +73,7 @@ export const ActionsContainer: React.FC<Props> = ({ projectName, actions_prop, p
           isChecked={action.isChecked}
           projects={projects}
           setActions={setActions}
-          tag = {action.tag}
+          tag={action.tag}
         />)}
 
       </div>

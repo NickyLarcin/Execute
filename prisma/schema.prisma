@@ -25,6 +25,7 @@ model actions {
   isFocused Boolean
   isChecked Boolean
   userId String
+  tag String @default("action")
 }
 
 model projects {

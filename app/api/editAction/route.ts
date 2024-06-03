@@ -148,6 +148,24 @@ export async function PUT(req: NextRequest) {
 
 
             return NextResponse.json({ success: true, data: ans })
+        } else if (type === "tag") {
+
+
+            const ans = await db.actions.update({
+                where: {
+                    id: id
+                },
+                data: {
+                    tag: edit 
+                }
+
+            })
+
+            console.log(ans)
+
+
+
+            return NextResponse.json({ success: true, data: ans })
         } 
 
 

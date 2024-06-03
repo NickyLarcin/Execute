@@ -5,7 +5,6 @@ import { db } from "@/lib/db";
 import { Card, EventProps } from "@tremor/react";
 import { ScatterChart } from "@tremor/react"
 import { Skeleton } from "@/components/ui/skeleton"
-import { Item } from "@radix-ui/react-select";
 
 
 type Action = {
@@ -27,38 +26,23 @@ export default function Page() {
 
   const [actions, setActions] = React.useState<Action[]>([])
   const [loading, setLoading] = React.useState(true);
-  const [projectList, setProjectList] = React.useState<string[]>([])
 
 
   useEffect(() => {
-
-    console.log("hi3")
     const fetchData = async () => {
       try {
         const response = await fetch("/api/getActions");
         const result = await response.json();
         const data : Action[] = result.data;
 
-        const projectList = data.map(item => {
-          return item.project
-
-        }).filter((value, index, self) => self.indexOf(value) === index)
-
-        setProjectList(projectList)
-
         const updatedData = data.map(item => {
           return {
             ...item,
             size: Math.sqrt(item.time * item.urgency),
             urgency : (1+(Math.random()-0.5)*0.1)*item.urgency,
-            time : (1+(Math.random()-0.5)*0.1)*item.time,
-            projectX : ((Math.random()-0.5)*0.3)+projectList.indexOf(item.project)+1
+            time : (1+(Math.random()-0.5)*0.1)*item.time
           };
         });
-
-        
-
-        console.log(projectList)
         
         setActions(updatedData);
         setLoading(false);
@@ -140,7 +124,7 @@ export default function Page() {
           yAxisWidth={40}
           data={actions}
           category="name"
-          x="projectX"
+          x="time"
           y="urgency"
           size="size"
           showOpacity={true}
@@ -149,10 +133,10 @@ export default function Page() {
           enableLegendSlider
           showLegend={false}
           customTooltip={customTooltip}
-          maxXValue={4}
+          maxXValue={200}
           maxYValue={100}
           valueFormatter={{
-            x: (time) => `${projectList[(Math.round(time))-1]}`,
+            x: (time) => `${(time).toFixed(1)}min`,
             y: (urgency) => `${urgency}`,
             size: (time) =>
               `${(time / 60).toFixed(1)}hours`,

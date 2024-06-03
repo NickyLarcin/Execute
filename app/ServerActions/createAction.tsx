@@ -16,6 +16,8 @@ export const createAction = async (form : FormData) => {
     const project = form.get("project")?.toString() || ""
     const urgency = parseInt(form.get("urgency")?.toString() || "")
     const time = parseInt(form.get("time")?.toString() || "")
+    const isFocused = form.get("isFocused")?.toString() || ""
+    const tag = form.get("tag")?.toString() || ""
 
     const rawDate = form.get("date")?.toString() || ""
     console.log(rawDate)
@@ -37,9 +39,10 @@ export const createAction = async (form : FormData) => {
             date : date ,
             time : time ,
             people : "String" ,
-            isFocused : false,
+            isFocused : isFocused === "true" ? true : false,
             isChecked : false,
-            userId : user.id
+            userId : user.id,
+            tag : tag
           }
         }
     )

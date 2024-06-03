@@ -42,11 +42,17 @@ type Props = {
     isChecked: boolean
     projects: Project[]
     setActions: any
+    tag : string
 }
 
 type Project = {
     id: string
     name: string
+}
+
+const tagsDic = {
+    "action" : ["action","border-orange-500 text-orange-500"] ,
+    "monitor" : ["monitor","border-purple-500 text-purple-500"]
 }
 
 export const Action: React.FC<Props> = (props) => {
@@ -64,6 +70,7 @@ export const Action: React.FC<Props> = (props) => {
     const [projects, setProjects] = useState<Project[]>(props.projects)
     const [time, setTime] = useState<number>(props.time)
     const [date, setDate] = React.useState<Date>(new Date())
+    const [tag, setTag] = React.useState(props.tag)
 
 
 
@@ -107,6 +114,8 @@ export const Action: React.FC<Props> = (props) => {
             setTime(edit);
         } else if (type === "date" && edit instanceof Date) {
             setDate(edit);
+        } else if (type === "tag") {
+            setTag(edit.toString());
         }
 
         debouncedEdit(type, edit);
@@ -137,19 +146,9 @@ export const Action: React.FC<Props> = (props) => {
 
 
 
-    const colorVariants: { [key: number]: string } = {
-        10: 'text-red-100 ',
-        20: 'text-red-200 ',
-        30: 'text-red-300 ',
-        40: 'text-red-400 ',
-        50: 'text-red-500 ',
-        60: 'text-red-600 ',
-        70: 'text-red-700 ',
-        80: 'text-red-800 ',
-        90: 'text-red-900 ',
-        100: 'text-red-900 ',
-    };
 
+
+    
     return (
 
         <div className={`flex flex-col w-full relative group transition hover:shadow-sm duration-400 ${isFading ? 'opacity-0 scale-y-0 origin-top -z-50' : 'opacity-100'}`}>
@@ -269,9 +268,16 @@ export const Action: React.FC<Props> = (props) => {
                         </div>
                         <div className=''>
                             <div>
-                                <div className='w-16 h-4 rounded-full border border-orange-500 text-orange-500 bg-white text-[10px] text-center font-semibold'>
-                                    Action
-                                </div>
+                            <Select name="tag" onValueChange={(value) => { handleEdit("tag", value) }}>
+                                        <SelectTrigger className={` ${tagsDic[tag][1]} w-16 h-4 rounded-full border  bg-white text-[10px] text-center font-semibold`}>
+                                            <SelectValue placeholder={tag} className='text-xs' />
+                                        </SelectTrigger>
+                                        <SelectContent className='text-xs'>
+                                        <SelectItem value={`action`} className='text-xs' >{"action"}</SelectItem>
+                                        <SelectItem value={`monitor`} className='text-xs' >{"monitor"}</SelectItem>
+                                        </SelectContent>
+                                    </Select>
+                               
                             </div>
                         </div>
                     </div>

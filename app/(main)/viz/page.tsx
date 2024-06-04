@@ -39,7 +39,10 @@ export default function Page() {
     console.log("hi3")
     const fetchData = async () => {
       try {
-        const response = await fetch("/api/getLiveActions", {
+
+        const cacheBuster = new Date().getTime();
+
+        const response = await fetch(`/api/getLiveActions?cb=${cacheBuster}`, {
           method: 'GET',
           headers: {
             'Cache-Control': 'no-cache',

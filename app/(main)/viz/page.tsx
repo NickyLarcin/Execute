@@ -19,6 +19,8 @@ type Action = {
   people: string;
   isFocused: boolean;
   isChecked: boolean;
+  tag : string;
+  history : boolean
 };
 
 
@@ -30,12 +32,20 @@ export default function Page() {
   const [projectList, setProjectList] = React.useState<string[]>([])
 
 
+  
+
   useEffect(() => {
 
     console.log("hi3")
     const fetchData = async () => {
       try {
-        const response = await fetch("/api/getActions");
+        const response = await fetch("/api/getLiveActions", {
+          method: 'GET',
+          headers: {
+            'Cache-Control': 'no-cache',
+            'Pragma': 'no-cache'
+          }
+        });
         const result = await response.json();
         const data : Action[] = result.data;
 
@@ -133,12 +143,41 @@ export default function Page() {
 
 
       <Card className="mx-10 mb-10 mt-10 p-10  ">
-        <p className="text-lgdark:text-dark-tremor-content-strong font-semibold text-xl text-orange-500">Tasks Overview</p>
-        <p className="text-tremor-default text-tremor-content dark:text-dark-tremor-content leading-6">Vizualize your actions and select focus actions </p>
+        <p className="text-lgdark:text-dark-tremor-content-strong font-semibold text-xl text-orange-500">Actions Overview</p>
+        <p className="text-tremor-default text-tremor-content dark:text-dark-tremor-content leading-6">Vizualize Immediate actions  </p>
         <ScatterChart
           className="-ml-2 mt-6 h-80"
           yAxisWidth={40}
-          data={actions}
+          data={actions.filter(action => action.tag === "action")}
+          category="name"
+          x="projectX"
+          y="urgency"
+          size="size"
+          showOpacity={true}
+          intervalType={"preserveStartEnd"}
+          showGridLines = {true}
+          enableLegendSlider
+          showLegend={false}
+          customTooltip={customTooltip}
+          maxXValue={4}
+          maxYValue={100}
+          valueFormatter={{
+            x: (time) => `${projectList[(Math.round(time))-1]}`,
+            y: (urgency) => `${urgency}`,
+            size: (size) =>
+              `${(size / 60).toFixed(1)}hours`,
+          }}
+          onValueChange={(v) => setValue(v)}
+        />
+      </Card>
+
+      <Card className="mx-5 mb-10 mt-10 p-10  ">
+        <p className="text-lgdark:text-dark-tremor-content-strong font-semibold text-xl text-orange-500">Monitors Overview</p>
+        <p className="text-tremor-default text-tremor-content dark:text-dark-tremor-content leading-6">Vizualize Topics to Monitor  </p>
+        <ScatterChart
+          className="-ml-2 mt-6 h-80"
+          yAxisWidth={40}
+          data={actions.filter(action => action.tag === "monitor")}
           category="name"
           x="projectX"
           y="urgency"

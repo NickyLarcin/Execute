@@ -43,6 +43,7 @@ type Props = {
     projects: Project[]
     setActions: any
     tag : string
+    history: boolean
 }
 
 type Project = {
@@ -71,6 +72,8 @@ export const Action: React.FC<Props> = (props) => {
     const [time, setTime] = useState<number>(props.time)
     const [date, setDate] = React.useState<Date>(new Date())
     const [tag, setTag] = React.useState(props.tag)
+    const [history, setHistory] = React.useState(props.history)
+    
 
 
 
@@ -116,11 +119,19 @@ export const Action: React.FC<Props> = (props) => {
             setDate(edit);
         } else if (type === "tag") {
             setTag(edit.toString());
-        }
+        } else if (type === "history") {
+            setHistory(!history);
+        } 
 
         debouncedEdit(type, edit);
     }
     const handleDelete = async () => {
+
+        if(props.isChecked === true){
+            handleEdit("history", "true")
+            return
+        }
+
         setIsFading(true);
         setTimeout(async () => {
             await fetch("api/deleteAction", {

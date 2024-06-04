@@ -166,7 +166,26 @@ export async function PUT(req: NextRequest) {
 
 
             return NextResponse.json({ success: true, data: ans })
-        } 
+        } else if (type === "history") {
+
+            console.log(edit)
+
+            const ans = await db.actions.update({
+                where: {
+                    id: id
+                },
+                data: {
+                    history: edit === "true" ? true : false
+                }
+
+            })
+
+            console.log(ans)
+
+
+
+            return NextResponse.json({ success: true, data: ans })
+        }
 
 
         revalidatePath("/")

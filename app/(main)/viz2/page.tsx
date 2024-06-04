@@ -31,7 +31,7 @@ export default function Page() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("/api/getActions", {
+        const response = await fetch("/api/getLiveActions", {
           method: 'GET',
           headers: {
             'Cache-Control': 'no-cache',

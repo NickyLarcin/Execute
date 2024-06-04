@@ -26,6 +26,7 @@ model actions {
   isChecked Boolean
   userId String
   tag String @default("action")
+  history Boolean
 }
 
 model projects {

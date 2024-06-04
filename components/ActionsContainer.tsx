@@ -29,6 +29,7 @@ type Actions = {
   isFocused: boolean
   isChecked: boolean
   tag: string
+  history: boolean
 
 }
 
@@ -50,7 +51,7 @@ export const ActionsContainer: React.FC<Props> = ({ projectName, actions_prop, p
         <div className="flex gap-2">
           <IoChevronForward onClick={() => { setExpanded(!expanded) }} className={` transition duration-300 cursor-pointer ${expanded ? "rotate-90" : ""}`} size={20} />
           <div className="font-semibold text-base ml-1">{projectName}</div>
-          <div className="font-semibold text-neutral-400">{actions.length}</div>
+          <div className=" text-neutral-400">{actions.length}</div>
         </div>
         <div>
           <ActionForm project={projectName}>
@@ -74,6 +75,7 @@ export const ActionsContainer: React.FC<Props> = ({ projectName, actions_prop, p
           projects={projects}
           setActions={setActions}
           tag={action.tag}
+          history = {action.history}
         />)}
 
       </div>

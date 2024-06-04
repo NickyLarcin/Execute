@@ -8,7 +8,7 @@ export const GET = async (req: NextRequest) => {
 
     try {
  
-    const data = await db.actions.findMany()
+    const data = await db.actions.findMany({where : {history : false}})
     
 
 

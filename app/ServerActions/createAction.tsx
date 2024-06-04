@@ -42,7 +42,8 @@ export const createAction = async (form : FormData) => {
             isFocused : isFocused === "true" ? true : false,
             isChecked : false,
             userId : user.id,
-            tag : tag
+            tag : tag,
+            history : false
           }
         }
     )

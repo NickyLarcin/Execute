@@ -24,6 +24,7 @@ type Action = {
     isChecked: boolean;
     userId: string;
     tag: string;
+    history: boolean
 }
 
 type Project = {

@@ -55,14 +55,14 @@ export default async function Home() {
   const user = await currentUser()
   if ( !user || !user.id ) return (<div>Error Fetching User</div>)
 
-  const actions = await db.actions.findMany({ where : { userId : user.id}})
+  const actions = await db.actions.findMany({ where : { userId : user.id, history : false}})
   const projects = await db.projects.findMany()
 
   
 
   
   return (
-    <div className="relative w-full flex">
+    <div className="relative w-full flex justify-center">
 
       
       
@@ -83,21 +83,6 @@ export default async function Home() {
 
         <ActionsDisplay actions={actions} projects={projects} />
 
-      <div className="fixed top-32 right-[15%]">
-        
-        
-          
-
-          
-         
-           
-
-
-         
-        
-      </div>
-
-      
     </div>
     <div className="max-w-[424px] flex flex-col w-full relative m-2 ">
       <div className="max-w-[424px] w-full h-full border rounded-md fixed">

@@ -34,7 +34,8 @@ export default async function Page() {
   
   const focusedActions = await db.actions.findMany({
     where : { isFocused : true,
-      userId : user.id
+      userId : user.id,
+      history: true
      }
   })
 

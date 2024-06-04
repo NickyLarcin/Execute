@@ -3,6 +3,8 @@
 import { db } from "@/lib/db"
 import { NextRequest, NextResponse } from "next/server"
 
+export const dynamic = 'force-dynamic'
+
 export const GET = async (req: NextRequest) => {
 
 

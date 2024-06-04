@@ -31,7 +31,13 @@ export default function Page() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("/api/getActions");
+        const response = await fetch("/api/getActions", {
+          method: 'GET',
+          headers: {
+            'Cache-Control': 'no-cache',
+            'Pragma': 'no-cache'
+          }
+        })
         const result = await response.json();
         const data : Action[] = result.data;
 

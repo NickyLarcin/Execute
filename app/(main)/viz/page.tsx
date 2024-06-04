@@ -49,7 +49,7 @@ export default function Page() {
         const updatedData = data.map(item => {
           return {
             ...item,
-            size: Math.sqrt(item.time * item.urgency),
+            size: item.urgency + item.time,
             urgency : (1+(Math.random()-0.5)*0.1)*item.urgency,
             time : (1+(Math.random()-0.5)*0.1)*item.time,
             projectX : ((Math.random()-0.5)*0.3)+projectList.indexOf(item.project)+1
@@ -154,8 +154,8 @@ export default function Page() {
           valueFormatter={{
             x: (time) => `${projectList[(Math.round(time))-1]}`,
             y: (urgency) => `${urgency}`,
-            size: (time) =>
-              `${(time / 60).toFixed(1)}hours`,
+            size: (size) =>
+              `${(size / 60).toFixed(1)}hours`,
           }}
           onValueChange={(v) => setValue(v)}
         />

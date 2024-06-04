@@ -15,7 +15,7 @@ export const createAction = async (form : FormData) => {
     const description = form.get("description")?.toString() || ""
     const project = form.get("project")?.toString() || ""
     const urgency = parseInt(form.get("urgency")?.toString() || "")
-    const time = parseInt(form.get("time")?.toString() || "")
+    const time = parseInt(form.get("time")?.toString() || "") || 0
     const isFocused = form.get("isFocused")?.toString() || ""
     const tag = form.get("tag")?.toString() || ""
 

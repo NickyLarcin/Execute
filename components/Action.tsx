@@ -42,7 +42,7 @@ type Props = {
     isChecked: boolean
     projects: Project[]
     setActions: any
-    tag : string
+    tag: string
     history: boolean
 }
 
@@ -52,8 +52,8 @@ type Project = {
 }
 
 const tagsDic = {
-    "action" : ["action","border-orange-500 text-orange-500"] ,
-    "monitor" : ["monitor","border-purple-500 text-purple-500"]
+    "action": ["action", "border-orange-500 text-orange-500"],
+    "monitor": ["monitor", "border-purple-500 text-purple-500"]
 }
 
 export const Action: React.FC<Props> = (props) => {
@@ -73,7 +73,7 @@ export const Action: React.FC<Props> = (props) => {
     const [date, setDate] = React.useState<Date>(new Date())
     const [tag, setTag] = React.useState(props.tag)
     const [history, setHistory] = React.useState(props.history)
-    
+
 
 
 
@@ -121,7 +121,7 @@ export const Action: React.FC<Props> = (props) => {
             setTag(edit.toString());
         } else if (type === "history") {
             setHistory(!history);
-        } 
+        }
 
         debouncedEdit(type, edit);
     }
@@ -129,15 +129,15 @@ export const Action: React.FC<Props> = (props) => {
 
         props.setActions((actions: any) => actions.filter((action: any) => action.id !== id))
 
-        if(isChecked === true && props.history === false){
-            
+        if (isChecked === true && props.history === false) {
+
             handleEdit("history", "true")
             setIsFading(true);
-            setTimeout( async () => {
+            setTimeout(async () => {
 
                 setIsFading(false)
 
-            },100)
+            }, 100)
             return
         }
 
@@ -168,7 +168,7 @@ export const Action: React.FC<Props> = (props) => {
 
 
 
-    
+
     return (
 
         <div className={`flex flex-col w-full relative group transition hover:shadow-sm duration-400 ${isFading ? 'opacity-0 scale-y-0 origin-top -z-50' : 'opacity-100'}`}>
@@ -206,10 +206,10 @@ export const Action: React.FC<Props> = (props) => {
                             className="inline bg-transparent border-none focus:outline-none text-xs w-full flex-wrap text-pretty focus:ring-transparent mb-1 text-neutral-400"
                         />
                     </div>
-                    <div className='flex w-full h-6 justify-between text-xs items-center text-neutral-400'>
-                        <div className='flex gap-2 items-center h-6'>
-                            <div className='flex gap-2 h-6 items-center'>
-                                <div className='flex gap-2 border-none h-6 hover:bg-accent hover:text-accent-foreground px-2 py-1 rounded-md'>
+                    <div className='flex w-full lg:h-6 justify-between text-xs items-center text-neutral-400'>
+                        <div className='grid grid-cols-2 lg:flex gap-2 items-center h-full'>
+                            <div className='flex gap-2 h-full items-center'>
+                                <div className='flex gap-2 border-none h-full hover:bg-accent hover:text-accent-foreground px-2 py-1 rounded-md'>
                                     <svg
                                         viewBox="0 0 576 512"
                                         fill="currentColor"
@@ -229,7 +229,7 @@ export const Action: React.FC<Props> = (props) => {
                                     </Select>
                                 </div>
                             </div>
-                            &bull;
+                            <div className='hidden lg:block'>&bull;</div>
                             <div className='flex gap-1'>
                                 <Popover>
                                     <PopoverTrigger asChild>
@@ -239,7 +239,7 @@ export const Action: React.FC<Props> = (props) => {
                                                 fill="currentColor"
                                                 height="2em"
                                                 width="2em"
-                                                
+
                                             >
                                                 <path d="M793.8 499.3L506.4 273.5c-10.7-8.4-26.4-.8-26.4 12.7v451.6c0 13.5 15.7 21.1 26.4 12.7l287.4-225.8a16.14 16.14 0 000-25.4zm-320 0L186.4 273.5c-10.7-8.4-26.4-.8-26.4 12.7v451.5c0 13.5 15.7 21.1 26.4 12.7l287.4-225.8c4.1-3.2 6.2-8 6.2-12.7 0-4.6-2.1-9.4-6.2-12.6zM857.6 248h-51.2c-3.5 0-6.4 2.7-6.4 6v516c0 3.3 2.9 6 6.4 6h51.2c3.5 0 6.4-2.7 6.4-6V254c0-3.3-2.9-6-6.4-6z" />
                                             </svg>
@@ -251,32 +251,35 @@ export const Action: React.FC<Props> = (props) => {
                                     </PopoverContent>
                                 </Popover>
                             </div>
-                           
+
                             {props.tag === "action" &&
-                                <>&bull; 
-                                <div className='flex'> 
-                                <Popover>
-                                    <PopoverTrigger asChild>
-                                        <Button variant="outline" className='flex gap-1 border-none h-6 text-xs'>
-                                            <svg
-                                                viewBox="0 0 24 24"
-                                                fill="currentColor"
-                                                height="2em"
-                                                width="2em"
-                                                
-                                            >
-                                                <path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z" />
-                                                <path d="M13 7h-2v5.414l3.293 3.293 1.414-1.414L13 11.586z" />
-                                            </svg>  {time}
-                                        </Button>
-                                    </PopoverTrigger>
-                                    <PopoverContent className="w-80">
-                                        <Slider defaultValue={[props.time]} max={200} step={10} name="time" onValueChange={(value) => { handleEdit("time", value[0]) }} />
-                                    </PopoverContent>
-                                </Popover>
-                            </div></>}
-                            &bull;
-                            <div className='flex gap-2 hover:bg-accent hover:text-accent-foreground px-2 rounded-md h-6 items-center'>
+                                <>
+                                    <div className='hidden lg:block'>&bull;</div>
+
+                                    <div className='flex'>
+                                        <Popover>
+                                            <PopoverTrigger asChild>
+                                                <Button variant="outline" className='flex gap-1 border-none h-6 text-xs'>
+                                                    <svg
+                                                        viewBox="0 0 24 24"
+                                                        fill="currentColor"
+                                                        height="2em"
+                                                        width="2em"
+
+                                                    >
+                                                        <path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z" />
+                                                        <path d="M13 7h-2v5.414l3.293 3.293 1.414-1.414L13 11.586z" />
+                                                    </svg>  {time}
+                                                </Button>
+                                            </PopoverTrigger>
+                                            <PopoverContent className="w-80">
+                                                <Slider defaultValue={[props.time]} max={200} step={10} name="time" onValueChange={(value) => { handleEdit("time", value[0]) }} />
+                                            </PopoverContent>
+                                        </Popover>
+                                    </div></>}
+                            <div className='hidden lg:block'>&bull;</div>
+
+                            <div className='flex gap-2 hover:bg-accent hover:text-accent-foreground px-2 rounded-md h-full items-center'>
                                 <div className='flex gap-2 border-none h-6 text-xs items-center'>
 
                                     <CalendarIcon className=" h-5 w-5" />
@@ -289,16 +292,16 @@ export const Action: React.FC<Props> = (props) => {
                         </div>
                         <div className=''>
                             <div>
-                            <Select name="tag" onValueChange={(value) => { handleEdit("tag", value) }}>
-                                        <SelectTrigger className={` ${tagsDic[tag][1]} w-16 h-4 rounded-full border  bg-white text-[10px] flex justify-center items-center font-semibold`}>
-                                            <SelectValue placeholder={tag} className='text-xs' />
-                                        </SelectTrigger>
-                                        <SelectContent className='text-xs'>
+                                <Select name="tag" onValueChange={(value) => { handleEdit("tag", value) }}>
+                                    <SelectTrigger className={` ${tagsDic[tag][1]} w-16 h-4 rounded-full border  bg-white text-[10px] flex justify-center items-center font-semibold`}>
+                                        <SelectValue placeholder={tag} className='text-xs' />
+                                    </SelectTrigger>
+                                    <SelectContent className='text-xs'>
                                         <SelectItem value={`action`} className='text-xs' >{"action"}</SelectItem>
                                         <SelectItem value={`monitor`} className='text-xs' >{"monitor"}</SelectItem>
-                                        </SelectContent>
-                                    </Select>
-                               
+                                    </SelectContent>
+                                </Select>
+
                             </div>
                         </div>
                     </div>

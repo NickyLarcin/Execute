@@ -11,7 +11,7 @@
 - [ ] User can switch views for various criteria of filter
 - [ ] User can register and sign in
 - [ ] User can highlight projects on the chart board
-- [ ] User can create Actions or Monitors
+- [X] User can create Actions or Monitors
 
 
 

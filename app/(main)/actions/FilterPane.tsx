@@ -7,7 +7,16 @@ import { usePathname, useRouter } from "next/navigation"
 
 export default function Page() {
 
-    const [tagFilter, setTagFilter] = useState("")
+    function getQueryParam(param) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(param);
+      }
+
+    const tag = getQueryParam('tag');
+
+    console.log(tag)
+
+    const [tagFilter, setTagFilter] = useState(tag || "")
 
     const pathname = usePathname()
     const router = useRouter()

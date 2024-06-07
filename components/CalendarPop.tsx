@@ -11,14 +11,12 @@ import { format } from "date-fns"
 import { cn } from "@/lib/utils"
 
 type Props = {
-    date : Date 
+    date : Date | null
     setDate : (date : Date | undefined ) => void 
 }
 
 export const  CalendarPop : React.FC<Props> = ({date, setDate}) => {
-
-    
-        
+       
        
         return (
           <Popover>
@@ -37,7 +35,7 @@ export const  CalendarPop : React.FC<Props> = ({date, setDate}) => {
             <PopoverContent className="w-auto p-0">
               <Calendar
                 mode="single"
-                selected={date}
+                selected={date || new Date()}
                 onSelect={setDate}
                 initialFocus
               />

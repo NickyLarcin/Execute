@@ -27,6 +27,7 @@ model actions {
   userId String
   tag String @default("action")
   history Boolean
+  historyDate DateTime?
 }
 
 model projects {

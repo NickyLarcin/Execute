@@ -175,7 +175,8 @@ export async function PUT(req: NextRequest) {
                     id: id
                 },
                 data: {
-                    history: edit === "true" ? true : false
+                    history: edit === "true" ? true : false,
+                    historyDate : edit === "true" ? new Date : null,
                 }
 
             })
@@ -185,7 +186,25 @@ export async function PUT(req: NextRequest) {
 
 
             return NextResponse.json({ success: true, data: ans })
-        }
+        } else if (type === "historyDate") {
+
+
+            const ans = await db.actions.update({
+                where: {
+                    id: id
+                },
+                data: {
+                    historyDate: edit 
+                }
+
+            })
+
+            console.log(ans)
+
+
+
+            return NextResponse.json({ success: true, data: ans })
+        } 
 
 
         revalidatePath("/")

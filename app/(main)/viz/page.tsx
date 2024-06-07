@@ -2,10 +2,12 @@
 
 import React, { useEffect } from "react";
 import { db } from "@/lib/db";
-import { Card, EventProps } from "@tremor/react";
+import { BarChart, Card, EventProps } from "@tremor/react";
 import { ScatterChart } from "@tremor/react"
 import { Skeleton } from "@/components/ui/skeleton"
 import { Item } from "@radix-ui/react-select";
+import { ActionFormViz } from "./ActionFormViz";
+import { AArrowDown } from "lucide-react";
 
 
 type Action = {
@@ -30,13 +32,20 @@ export default function Page() {
   const [actions, setActions] = React.useState<Action[]>([])
   const [loading, setLoading] = React.useState(true);
   const [projectList, setProjectList] = React.useState<string[]>([])
+  const [dialogIsOpen, setDialogIsOpen] = React.useState(false);
+  const [names, setNames] = React.useState<string[]>([])
+
+  const openForm = (v) => {
+    
+    setDialogIsOpen(!dialogIsOpen)
+  }
+
 
 
   
 
   useEffect(() => {
 
-    console.log("hi3")
     const fetchData = async () => {
       try {
 
@@ -86,6 +95,40 @@ export default function Page() {
 
   const [value, setValue] = React.useState<EventProps>(null);
 
+ const [dataforBarChart, setDataForBarChart] = React.useState<any>([])
+
+ useEffect(() => {
+  // Extract all names
+  setNames(actions.map(item => item.name))
+
+  const data = {}
+
+
+  actions.filter(action => action.tag === "action").forEach((item, index) => {
+
+
+
+    const urgencyKey = (Math.round(item.urgency/10)*10).toString()
+
+    if (!data[urgencyKey]) {
+      data[urgencyKey] = {urgency : urgencyKey};
+    }
+
+    data[urgencyKey][item.name] = (Math.round((Math.round(item.time)/60)*10)/10)
+
+  })
+
+  console.log("data")
+  console.log(data)
+  console.log("names")
+  console.log(names)
+
+  setDataForBarChart(Object.values(data))
+
+
+ },[actions])
+
+  
 
 
 
@@ -131,7 +174,7 @@ export default function Page() {
     );
   }
 
-
+ 
 
 
 
@@ -142,10 +185,10 @@ export default function Page() {
 
 
   return (
-    <div className="w-screen flex justify-center items-center ">
+    <div className="w-screen grid grid-cols-1 lg:grid-cols-2 justify-center items-center gap-4 p-4 ">
 
 
-      <Card className="mx-10 mb-10 mt-10 p-10  ">
+      <Card className=" lg:p-10 p-2  ">
         <p className="text-lgdark:text-dark-tremor-content-strong font-semibold text-xl text-orange-500">Actions Overview</p>
         <p className="text-tremor-default text-tremor-content dark:text-dark-tremor-content leading-6">Vizualize Immediate actions  </p>
         <ScatterChart
@@ -170,11 +213,11 @@ export default function Page() {
             size: (size) =>
               `${(size / 60).toFixed(1)}hours`,
           }}
-          onValueChange={(v) => setValue(v)}
+          onValueChange={(v) => {setValue(v), openForm(v)}}
         />
       </Card>
 
-      <Card className="mx-5 mb-10 mt-10 p-10  ">
+      <Card className=" lg:p-10 p-2   ">
         <p className="text-lgdark:text-dark-tremor-content-strong font-semibold text-xl text-orange-500">Monitors Overview</p>
         <p className="text-tremor-default text-tremor-content dark:text-dark-tremor-content leading-6">Vizualize Topics to Monitor  </p>
         <ScatterChart
@@ -202,6 +245,18 @@ export default function Page() {
           onValueChange={(v) => setValue(v)}
         />
       </Card>
+      <Card className="lg:p-10 p-2    ">
+        <p className="text-lgdark:text-dark-tremor-content-strong font-semibold text-xl text-orange-500">Actions Overview</p>
+        <p className="text-tremor-default text-tremor-content dark:text-dark-tremor-content leading-6">Vizualize Topics to Monitor  </p>
+      <BarChart 
+      data={dataforBarChart} 
+      categories={names} 
+      index="urgency"     
+      stack={true}
+      showLegend={false}
+      />
+      </Card>
+     
     </div>
 
   );

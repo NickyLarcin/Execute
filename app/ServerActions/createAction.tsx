@@ -4,6 +4,7 @@ import { db } from "@/lib/db"
 import { currentUser } from "@clerk/nextjs/server"
 import { revalidatePath } from "next/cache"
 import { NextResponse } from "next/server"
+import { toast } from "sonner"
 
 export const createAction = async (form : FormData) => {
 
@@ -49,6 +50,8 @@ export const createAction = async (form : FormData) => {
     )
 
     console.log("Entry created")
+
+    
     
     revalidatePath("/")
 

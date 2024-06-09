@@ -1,13 +1,15 @@
 "use client"
 
-import { ClerkLoaded, ClerkLoading, SignIn, SignInButton, SignedOut } from "@clerk/nextjs"
+import { ClerkLoaded, ClerkLoading, SignIn, SignInButton, SignedIn, SignedOut } from "@clerk/nextjs"
 import { currentUser } from "@clerk/nextjs/server";
 import Image from "next/image"
+import Link from "next/link";
 import React from "react"
 import Typed, { ReactTyped } from 'react-typed';
 
 
 export default function Page() {
+
 
 
    
@@ -42,6 +44,11 @@ export default function Page() {
                     <div className="w-[50%] rounded-full border-2 hover:bg-orange-500 hover:text-white hover:translate-y-[2px] flex justify-center mx-4 my-2 font-semibold p-2 cursor-pointer shadow-sm transition text-orange-500 border-orange-500">Get Started</div>
                     </SignInButton>
                     </SignedOut>
+                    <SignedIn>
+        
+                    <Link href={"/actions"} className="w-[50%] rounded-full border-2 hover:bg-orange-500 hover:text-white hover:translate-y-[2px] flex justify-center mx-4 my-2 font-semibold p-2 cursor-pointer shadow-sm transition text-orange-500 border-orange-500">Continue</Link>
+    
+                    </SignedIn>
 
 
                 </div>

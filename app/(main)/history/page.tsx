@@ -38,8 +38,7 @@ export default async function Page() {
 
     return (
         <div className="relative w-full flex justify-center">
-
-      
+          
       
     
     <div className="ml-12 max-w-[724px] flex flex-col w-full relative pt-10 pb-20 border rounded-md m-2 p-4">

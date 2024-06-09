@@ -30,6 +30,7 @@ import { currentUser } from "@clerk/nextjs/server";
 import FilterPane from "./FilterPane";
 import ActionsDisplay from "./ActionsDisplay";
 import { orderBy } from "lodash";
+import OrderPane from "./OrderPane";
 
 
 
@@ -51,12 +52,17 @@ type Project = {
 }
 
 
-export default async function Home() {
+export default async function Home({searchParams}) {
+
+
+  const orderVariable = searchParams.order || "urgency"
+  const tagCondition = searchParams.tag ? { tag: searchParams.tag } : {};
+
 
   const user = await currentUser()
   if (!user || !user.id) return (<div>Error Fetching User</div>)
 
-  const actions = await db.actions.findMany({ where: { userId: user.id, history: false }, orderBy: { urgency: "desc" } })
+  const actions = await db.actions.findMany({ where: { userId: user.id, history: false, ...tagCondition }, orderBy: { [orderVariable] : "desc" } })
   const projects = await db.projects.findMany()
 
 
@@ -74,11 +80,11 @@ export default async function Home() {
 
 
 
-      <div className=" lg:ml-12 max-w-[724px] flex flex-col w-full relative pt-10 pb-20 border rounded-md m-2 p-4">
+      <div className=" lg:ml-12 max-w-[724px] flex flex-col w-full relative pt-8 pb-20  rounded-md m-2 p-4">
         <div className="flex w-full justify-between relative">
           <div className="flex flex-col ">
-            <div className="font-semibold text-xl">Actions</div>
-            <div className="font-base text-neutral-400">Consult your actions here</div>
+            <div className="font-semibold text-xl">Entries</div>
+            <div className="font-base text-neutral-400">Consult your entries here</div>
           </div>
 
           <ActionForm project={""}>
@@ -91,9 +97,14 @@ export default async function Home() {
         <ActionsDisplay actions={actions} projects={projects} />
 
       </div>
-      <div className="max-w-[424px] flex-col w-full relative m-2 bg-zinc-50 lg:flex hidden ">
-        <div className="max-w-[424px] w-full h-full border rounded-md fixed">
+      <div className="max-w-[424px] flex-col w-full relative mt-8 bg-zinc-50 lg:flex hidden ">
+        <div className="max-w-[424px] w-full h-full fixed flex flex-col border rounded-md">
+        <div className="max-w-[424px] w-full">
           <FilterPane></FilterPane>
+        </div>
+        <div className="max-w-[424px] w-full">
+          <OrderPane></OrderPane>
+        </div>
         </div>
 
       </div>

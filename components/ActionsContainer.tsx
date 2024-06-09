@@ -47,20 +47,20 @@ export const ActionsContainer: React.FC<Props> = ({ projectName, actions_prop, p
 
   return (
     <div className="mt-2">
-      <div className="flex justify-between ">
+      <div className="flex justify-between border rounded-t-md p-1 text-white bg-gradient-to-r from-red-500 to-orange-400">
         <div className="flex gap-2">
           <IoChevronForward onClick={() => { setExpanded(!expanded) }} className={` transition duration-300 cursor-pointer ${expanded ? "rotate-90" : ""}`} size={20} />
-          <div className="font-semibold text-base ml-1">{projectName}</div>
-          <div className=" text-neutral-400">{actions.length}</div>
+          <div className="font-semibold text-base ml-1 tracking-wide">{projectName}</div>
+          <div className=" ">{actions.length}</div>
         </div>
         <div>
           <ActionForm project={projectName}>
-            <div className="h-4 w-14 hover:bg-orange-200 transition text-xl rounded-md flex justify-center items-center   text-orange-500 ">+</div>
+            <div className="h-4 w-14 hover:bg-orange-200 transition text-xl rounded-md flex justify-center items-center   text-white ">+</div>
           </ActionForm>
         </div>
       </div>
-      <div className={`w-full h-[3px] bg-gradient-to-r from-red-500 to-orange-400 rounded-xl mb-2`}></div>
-      <div className={`container p-2 gap-2 ${expanded ? "flex flex-col" : "hidden"}`}>
+
+      <div className={`container p-2 gap-2 ${expanded ? "flex flex-col" : "hidden"} border `}>
         {actions.map(action => <Action
           key={action.id}
           id={action.id}

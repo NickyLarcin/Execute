@@ -34,26 +34,10 @@ type Project = {
 
 export default function Page(props : Props) {
 
-    const [actions, setActions] = useState<Action[]>([])
     
 
-    const router = useRouter()
-    const searchParams = useSearchParams()
-    const pahtname = usePathname()
-
-    const tagFilter = searchParams.get("tag")
 
 
-    console.log("tagFilter")
-    console.log(searchParams.get("tag"))
-
-
-    useEffect(()=>{
-
-            console.log(tagFilter)
-            setActions(props.actions.filter(action => !tagFilter || action.tag === tagFilter ))
-
-    },[props.actions, tagFilter])
 
 
 
@@ -70,7 +54,7 @@ export default function Page(props : Props) {
 
     const displayActions = props.projects.map((project: Project) => {
 
-        const actionsPerProject = actionsOfProject(project.name, actions)
+        const actionsPerProject = actionsOfProject(project.name, props.actions)
 
         return (<ActionsContainer projectName={project.name} actions_prop={actionsPerProject} projects={props.projects} key={project.id} />)
 

@@ -31,7 +31,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={`${roboto.className} flex justify-center flex-col w-full h-full`}>
+        <body className={`${roboto.className} flex justify-center flex-col w-full h-screen`}>
          
           <main className="flex justify-center w-full h-full  ">
             {children}

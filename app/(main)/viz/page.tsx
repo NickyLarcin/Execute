@@ -6,7 +6,6 @@ import { BarChart, Card, EventProps } from "@tremor/react";
 import { ScatterChart } from "@tremor/react"
 import { Skeleton } from "@/components/ui/skeleton"
 import { Item } from "@radix-ui/react-select";
-import { ActionFormViz } from "./ActionFormViz";
 import { AArrowDown } from "lucide-react";
 
 
@@ -66,7 +65,7 @@ export default function Page() {
 
         }).filter((value, index, self) => self.indexOf(value) === index)
 
-        setProjectList(projectList)
+        setProjectList(["",...projectList,""])
 
         const updatedData = data.map(item => {
           return {
@@ -118,10 +117,7 @@ export default function Page() {
 
   })
 
-  console.log("data")
-  console.log(data)
-  console.log("names")
-  console.log(names)
+ 
 
   setDataForBarChart(Object.values(data))
 
@@ -133,7 +129,7 @@ export default function Page() {
 
 
 
-  if (loading) return <div className="w-screen flex justify-center items-center "><Skeleton className="mx-10 mb-10 mt-10 p-10"></Skeleton></div>
+  if (loading) return <div className="w-screen grid grid-cols-2 gap-2 justify-center items-center "><Skeleton className="mx-10 mb-10 mt-10 p-10 w-full h-80"></Skeleton><Skeleton className="mx-10 mb-10 mt-10 p-10 w-full h-80"></Skeleton><Skeleton className="mx-10 mb-10 mt-10 p-10 w-full h-80"></Skeleton></div>
 
 
   
@@ -208,7 +204,7 @@ export default function Page() {
           maxXValue={4}
           maxYValue={100}
           valueFormatter={{
-            x: (time) => `${projectList[(Math.round(time))-1]}`,
+            x: (time) => `${projectList[(Math.round(time))]}`,
             y: (urgency) => `${urgency}`,
             size: (size) =>
               `${(size / 60).toFixed(1)}hours`,
@@ -237,7 +233,7 @@ export default function Page() {
           maxXValue={4}
           maxYValue={100}
           valueFormatter={{
-            x: (time) => `${projectList[(Math.round(time))-1]}`,
+            x: (time) => `${projectList[(Math.round(time))]}`,
             y: (urgency) => `${urgency}`,
             size: (size) =>
               `${(size / 60).toFixed(1)}hours`,

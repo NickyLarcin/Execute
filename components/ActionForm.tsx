@@ -221,7 +221,7 @@ export const ActionForm: React.FC<Props> = ({children, project, isFocused_p}) =>
       </div>
       <div className="flex flex-grow w-full flex-col justify-end">
         <div className="flex flex-col justify-between">
-          <button type="submit" onClick={() => { toast("task Created"), setAction(""), setSideNotes("") }} className="w-full shadow-md bg-gradient-to-r from-red-500 to-orange-500 text-white p-2 rounded-md">Add Action</button>
+          <button type="submit" onClick={() => { toast("task Created")}} className="w-full shadow-md bg-gradient-to-r from-red-500 to-orange-500 text-white p-2 rounded-md">Add Action</button>
           <hr className="w-full px-10 border border-neutral-200 my-3"></hr>
           <div className="text-neutral-400 w-full text-center">Updated on Date of Month</div>
         </div>
